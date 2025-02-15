@@ -57,7 +57,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/subscription/subscribe?" + url_param);
       if (res.ok) {
         console.log("Inside res.ok");
-        let route = "/api/auth/login?returnTo=/home/register-business?" + url_param;
+        let route = "/api/auth/login?returnTo=/register-business?" + url_param;
         if (isPersonalPlan) {
           console.log("Inside isPersonalPlan");
           route = "/api/auth/login?returnTo=/home/register-personal?" + url_param;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "@/app/globals.css";
 
 import { AppSidebar } from "@/components/global/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -8,14 +8,13 @@ import { SidebarLayout } from "@/components/global/sidebar-layout";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 
-
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../../app/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../../app/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });

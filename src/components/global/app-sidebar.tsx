@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Calendar, Home, Inbox, Search, Settings, Users } from "lucide-react";
+import { Calendar, Home, Inbox, Search, Settings, Users, MapPinHouseIcon, MapPin } from "lucide-react";
 import { SidebarNewsletterForm } from "@/components/global/sidebar-newsletter-form";
 import { SidebarReferralForm } from "./sidebar-referral-form";
 import Link from "next/link";
@@ -27,6 +27,11 @@ const items = [
     title: "Home",
     url: "/",
     icon: Home,
+  },
+  {
+    title: "Jobs",
+    url: "/jobs",
+    icon: MapPinHouseIcon,
   },
   {
     title: "Inbox",

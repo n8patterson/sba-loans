@@ -14,27 +14,43 @@ import {
 import { BadgeCheck, Bell, CreditCard, LogOut, Sparkles, ChevronsUpDown, Calendar, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { useSidebar, SidebarMenuButton } from "@/components/ui/sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { InviteMemberDialog } from "@components/global/InviteMemberDialog";
+import { getMemberRoles } from "@/lib/auth0/auth0-okta-utils"; // Import the function
 
 export function AuthButtons() {
   const { user, isAuthenticated } = useAuth();
+  console.log("user", user);
   const { isMobile } = useSidebar();
   const [notifications, setNotifications] = useState({
     alerts: 3,
     messages: 5,
     calendar: 2,
   });
+  const [roles, setRoles] = useState<string[]>([]); // State to store user roles
 
   const totalNotifications = notifications.alerts + notifications.messages + notifications.calendar;
 
-  // if (!isAuthenticated) {
-  //   return (
-  //     <a href="/api/auth/login">
-  //       <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90">Login</button>
-  //     </a>
-  //   );
-  // }
+  // useEffect(() => {
+  //   // Fetch user roles
+  //   const fetchRoles = async () => {
+  //     if (user?.organizationId && user?.sub) {
+  //       try {
+  //         const rolesData = await getMemberRoles(user.organizationId, user.sub);
+  //         const roleNames = rolesData?.map((role: { name: string }) => role.name) || [];
+  //         setRoles(roleNames);
+  //         console.log("User roles:", roleNames);
+  //       } catch (error) {
+  //         console.error("Error fetching user roles:", error);
+  //       }
+  //     }
+  //   };
+
+  //   if (isAuthenticated) {
+  //     console.log("Fetching user roles...");
+  //     fetchRoles();
+  //   }
+  // }, [isAuthenticated, user]);
 
   return (
     <DropdownMenu>

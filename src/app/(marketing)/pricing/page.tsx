@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import HomeLayout from "@/components/layouts/home-layout";
 
 const plans = [
   {
@@ -88,7 +87,3 @@ export default function PricingPage() {
     </div>
   );
 }
-
-PricingPage.getLayout = function(page: any) {
-  return <HomeLayout>{page}</HomeLayout>;
-};
