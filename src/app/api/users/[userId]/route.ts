@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getUser, updateAppMetadata } from "@/lib/auth0/auth0-okta-utils";
+import { getUser, updateAppMetadata } from "@/lib/auth0/users";
 
 export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
   const userId = params.userId;

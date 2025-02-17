@@ -1,16 +1,11 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { Suspense, useState, FormEvent } from "react";
 
-interface RegisterBusinessProps {
-  user: {
-    name?: string;
-    email?: string;
-  };
-}
-
-export default function RegisterBusiness({ user }: RegisterBusinessProps) {
+// TODO
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function RegisterBusinessContent() {
   const [organization, setOrganization] = useState("");
   const [message, setMessage] = useState("");
 
@@ -84,5 +79,14 @@ export default function RegisterBusiness({ user }: RegisterBusinessProps) {
         </form>
       </div>
     </main>
+  );
+}
+
+// TODO: Remove the fallback div and replace it with a loading spinner
+export default function RegisterBusinessPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RegisterBusinessContent />
+    </Suspense>
   );
 }

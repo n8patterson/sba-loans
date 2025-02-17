@@ -9,8 +9,11 @@ import Link from "next/link";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
+
+// TODO: Implement form components
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,7 +28,9 @@ const formSchema = z.object({
   securityCode: z.string(),
 });
 
-export default function CheckoutPage() {
+function CheckoutContent() {
+  // TODO: Implement form submission
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [message, setMessage] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -238,9 +243,12 @@ export default function CheckoutPage() {
   );
 }
 
-// ConfirmPlan.getLayout = function (page) {
-//   return <HomeLayout>{page}</HomeLayout>;
-// };
-
-// import { withPageAuthRequired } from "@auth0/nextjs-auth0";
-// export const getServerSideProps = withPageAuthRequired();
+// TODO: Remove the following comment
+// 🔹 ✅ Wrap in Suspense to prevent hydration issues
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CheckoutContent />
+    </Suspense>
+  );
+}

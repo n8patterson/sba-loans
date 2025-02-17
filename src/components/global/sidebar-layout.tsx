@@ -1,24 +1,27 @@
 "use client";
 
 import { SidebarInset, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
 import { Bell, Calendar, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { TrialInfoBar } from "@/components/global/TrialInfoBar";
+
+import { TrialInfoBar } from "@/components/global/trialInfoBar";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { sub } from "date-fns";
 
 export function SidebarLayout({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
 
   console.log("User:", user);
   // Extract subscription from user object
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const subscription = user?.subscription || "trial";
 
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { setOpen } = useSidebar(); // Hook to control sidebar state
   const [daysLeft, setDaysLeft] = useState(30); // Default trial period
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [notifications, setNotifications] = useState({
     alerts: 3,
     messages: 5,

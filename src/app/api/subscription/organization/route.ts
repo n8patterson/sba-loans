@@ -1,4 +1,7 @@
-import { addMemberRoles, addMembers, createOrganization, getAllConnections, getAllRoles, updateAppMetadata } from "@/lib/auth0/auth0-okta-utils";
+import { getAllConnections } from "@/lib/auth0/connections";
+import { getAllRoles, addMemberRoles } from "@/lib/auth0/roles";
+import { addMembers, createOrganization } from "@/lib/auth0/organizations";
+import { updateAppMetadata } from "@/lib/auth0/users";
 import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -57,7 +60,7 @@ export const GET = withApiAuthRequired(async (req: NextRequest) => {
     console.log("All roles:", allRoles);
 
     // Get the admin role
-    const adminRole = allRoles.data.find((role) => role.name === "admin");
+    const adminRole = allRoles.data.find((role: { name: string }) => role.name === "admin");
 
     console.log("Admin role:", adminRole);
 
@@ -121,28 +124,42 @@ export const GET = withApiAuthRequired(async (req: NextRequest) => {
 
     // Update user metadata
     const app_metadata = { subscription };
+    // TODO
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const updatedUser = await updateAppMetadata(user_id, app_metadata);
 
     return NextResponse.json(newOrg, { status: 200 });
   } catch (error) {
     console.error("Failed to create organization:", error);
 
-    if (error.statusCode === 400) {
-      return NextResponse.json(
-        {
-          msg:
-            "Invalid organization name. It may contain lowercase alphabetical characters, numbers, underscores (_), and dashes (-). Can start with a number. Must be between 3 and 50 characters.",
-        },
-        { status: 400 }
-      );
-    }
+    if (error instanceof Error) {
+      // TODO
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ("statusCode" in error && (error as any).statusCode === 400) {
+        return NextResponse.json(
+          {
+            msg:
+              "Invalid organization name. It may contain lowercase alphabetical characters, numbers, underscores (_), and dashes (-). Can start with a number. Must be between 3 and 50 characters.",
+          },
+          { status: 400 }
+        );
+      }
 
-    if (error.statusCode === 404) {
-      return NextResponse.json({ msg: "Failed to create organization." }, { status: 404 });
-    }
+      // TODO
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ("statusCode" in error && (error as any).statusCode === 404) {
+        return NextResponse.json({ msg: "Failed to create organization." }, { status: 404 });
+      }
 
-    if (error.statusCode === 409) {
-      return NextResponse.json({ msg: error.message }, { status: 409 });
+      // TODO
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ("statusCode" in error && (error as any).statusCode === 409) {
+        // TODO
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return NextResponse.json({ msg: (error as any).message }, { status: 409 });
+      }
+
+      return NextResponse.json({ msg: `Internal error: ${error.message}` }, { status: 500 });
     }
 
     return NextResponse.json({ msg: "Internal error. Please try again later." }, { status: 500 });

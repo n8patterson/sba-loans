@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Calendar, Home, Inbox, Search, Settings, Users, MapPinHouseIcon, MapPin } from "lucide-react";
+import { Home, Inbox, Users, MapPinHouseIcon } from "lucide-react";
 import { SidebarNewsletterForm } from "@/components/global/sidebar-newsletter-form";
 import { SidebarReferralForm } from "./sidebar-referral-form";
 import Link from "next/link";
@@ -56,6 +56,8 @@ export function AppSidebar() {
     alerts: 5,
   };
 
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const totalNotifications = notifications.messages + notifications.calendar + notifications.alerts;
 
   return (

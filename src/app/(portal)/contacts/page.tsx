@@ -20,6 +20,8 @@ const contactColumns = [
   {
     accessorKey: "status",
     header: "Status",
+    // TODO
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cell: ({ row }: any) => <span className={`${row.original.status === "Active" ? "text-green-600" : "text-gray-500"}`}>{row.original.status}</span>,
   },
 ];

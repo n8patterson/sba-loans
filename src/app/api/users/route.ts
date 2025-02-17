@@ -1,5 +1,6 @@
+// TODO
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NextRequest, NextResponse } from "next/server";
-import {} from "@/lib/auth0/auth0-okta-utils";
 
 // export async function GET(req: NextRequest) {
 //   // Logic to fetch all users

@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { roles } = await req.body.json();
+    const { roles } = await req.json();
     await addMemberRoles(orgId, userId, roles);
     return NextResponse.json({ message: "Roles added successfully." }, { status: 200 });
   } catch (error) {
@@ -51,7 +51,7 @@ export async function DELETE(req: NextRequest) {
   }
 
   try {
-    const { roles } = await req.body.json();
+    const { roles } = await req.json();
     await removeMemberRoles(orgId, userId, roles);
     return NextResponse.json({ message: "Roles removed successfully." }, { status: 200 });
   } catch (error) {

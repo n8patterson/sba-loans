@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { updateAppMetadata } from "@/lib/auth0/auth0-okta-utils";
+import { updateAppMetadata } from "@/lib/auth0/users";
 import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
 // Allowed subscription plans

@@ -13,20 +13,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BadgeCheck, Bell, CreditCard, LogOut, Sparkles, ChevronsUpDown, Calendar, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSidebar, SidebarMenuButton } from "@/components/ui/sidebar";
-import { useState, useEffect } from "react";
-import { InviteMemberDialog } from "@components/global/InviteMemberDialog";
+import { useState } from "react";
 
 export function AuthButtons() {
   const { user } = useUser();
   const { isMobile } = useSidebar();
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [notifications, setNotifications] = useState({
     alerts: 3,
     messages: 5,
     calendar: 2,
   });
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [roles, setRoles] = useState<string[]>([]); // State to store user roles
 
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const totalNotifications = notifications.alerts + notifications.messages + notifications.calendar;
 
   // useEffect(() => {
@@ -55,19 +61,19 @@ export function AuthButtons() {
       <DropdownMenuTrigger asChild>
         <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
           <Avatar className="h-8 w-8 rounded-lg">
-            <AvatarImage src="/profile.png" alt={user?.name} />
+            <AvatarImage src="/profile.png" alt={user?.name || "User Image"} />
             {/* <AvatarImage src={user?.picture} alt={user?.name} /> */}
             {/* <AvatarFallback>{user?.name?.charAt(0) || "U"}</AvatarFallback> */}
             {/* Make avatar fallback an url to an image */}
             <AvatarFallback>
-              <img src="/profile.png" alt="Omniclan" />
+              <Image src="/profile.png" width={50} height={50} alt="Omniclan" />
             </AvatarFallback>
           </Avatar>
           <div className="text-left text-sm leading-tight md:block max-w-xs truncate">
-            <span className="font-semibold truncate" title={user?.name}>
+            <span className="font-semibold truncate" title={user?.name || "User Name"}>
               {user?.name}
             </span>
-            <span className="text-xs text-gray-500 block truncate" title={user?.email}>
+            <span className="text-xs text-gray-500 block truncate" title={user?.email || "Example Email"}>
               {user?.email}
             </span>
           </div>
@@ -80,22 +86,22 @@ export function AuthButtons() {
         align="end"
         sideOffset={4}
       >
-        <DropdownMenuLabel className="p-0 font-normal truncate" title={user?.name}>
+        <DropdownMenuLabel className="p-0 font-normal truncate" title={user?.name || "User Name"}>
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
             <Avatar className="h-8 w-8 rounded-lg">
-              <AvatarImage src="/profile.png" alt={user?.name} />
+              <AvatarImage src="/profile.png" alt={user?.name || "User Name"} />
               {/* <AvatarImage src={user?.picture} alt={user?.name} /> */}
               {/* <AvatarFallback>{user?.name?.charAt(0) || "U"}</AvatarFallback> */}
               {/* Make avatar fallback an url to an image */}
               <AvatarFallback>
-                <img src="/profile.png" alt="Omniclan" />
+                <Image src="/profile.png" width={50} height={50} alt="Omniclan" />
               </AvatarFallback>
             </Avatar>
             <div className="text-left text-sm leading-tight md:block max-w-xs truncate">
-              <span className="font-semibold truncate" title={user?.name}>
+              <span className="font-semibold truncate" title={user?.name || "User Name"}>
                 {user?.name}
               </span>
-              <span className="text-xs text-gray-500 block truncate" title={user?.email}>
+              <span className="text-xs text-gray-500 block truncate" title={user?.email || "Example Email"}>
                 {user?.email}
               </span>
             </div>

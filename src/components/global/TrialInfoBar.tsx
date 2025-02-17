@@ -1,6 +1,5 @@
 "use client";
 
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -19,6 +18,8 @@ export function TrialInfoBar({ daysLeft }: TrialInfoBarProps) {
     // TODO fix user type later
     const sub = (user.subscription as string).split("|");
     subscription_plan = sub[0];
+    // TODO
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     end_date = new Date(sub[1]);
   }
 

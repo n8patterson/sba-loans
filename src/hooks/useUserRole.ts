@@ -27,7 +27,8 @@ export function useUserRole() {
         const org = user["https://your-app.com/organization"] || "default";
 
         console.log("User Role", userRole);
-        setRole(userRole as string);
+        // TODO: Remove unknown
+        setRole((userRole as unknown) as string);
         setOrganization(org as string);
       }
     };
