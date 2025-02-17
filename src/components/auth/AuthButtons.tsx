@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -16,11 +16,9 @@ import Link from "next/link";
 import { useSidebar, SidebarMenuButton } from "@/components/ui/sidebar";
 import { useState, useEffect } from "react";
 import { InviteMemberDialog } from "@components/global/InviteMemberDialog";
-import { getMemberRoles } from "@/lib/auth0/auth0-okta-utils"; // Import the function
 
 export function AuthButtons() {
-  const { user, isAuthenticated } = useAuth();
-  console.log("user", user);
+  const { user } = useUser();
   const { isMobile } = useSidebar();
   const [notifications, setNotifications] = useState({
     alerts: 3,

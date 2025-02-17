@@ -6,9 +6,17 @@ import { Bell, Calendar, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { TrialInfoBar } from "@/components/global/TrialInfoBar"; // Adjust the import path as needed
+import { TrialInfoBar } from "@/components/global/TrialInfoBar";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { sub } from "date-fns";
 
 export function SidebarLayout({ children }: { children: React.ReactNode }) {
+  const { user } = useUser();
+
+  console.log("User:", user);
+  // Extract subscription from user object
+  const subscription = user?.subscription || "trial";
+
   const { setOpen } = useSidebar(); // Hook to control sidebar state
   const [daysLeft, setDaysLeft] = useState(30); // Default trial period
   const [notifications, setNotifications] = useState({
@@ -16,6 +24,7 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
     messages: 5,
     calendar: 2,
   }); // Example notification counts
+  // Get subscription status from user object
 
   useEffect(() => {
     // Simulated trial check (replace with API call later)
@@ -28,10 +37,13 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarInset className="flex flex-col flex-1 overflow-auto">
       <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between border-b bg-white shadow-md px-4">
-        <TrialInfoBar daysLeft={daysLeft} />
+        <SidebarTrigger />
+        <div className="flex items-center">
+          <TrialInfoBar daysLeft={daysLeft} />
+        </div>
 
         {/* Right: Icons (Calendar, Messages, Alerts, Profile) */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ml-auto">
           <div className="relative">
             <Calendar className="h-6 w-6 cursor-pointer text-gray-600 hover:text-gray-900 transition" />
             {notifications.calendar > 0 && (

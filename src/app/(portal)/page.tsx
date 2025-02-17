@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    console.log("Role", role);
+    console.log("Role Inside of base page", role);
     if (role === "admin") {
       router.replace("/admin");
     } else {

@@ -34,6 +34,12 @@ export async function getMembers(orgId: string): Promise<any> {
   return await managementClient.organizations.getMembers(params);
 }
 
+// Check if a user is a member of an organization
+export async function isMember(orgId: string, userId: string): Promise<boolean> {
+  const members = await getMembers(orgId);
+  return members.some((member: any) => member.user_id === userId);
+}
+
 export async function addMembers(orgId: string, userIds: string[]): Promise<void> {
   const params: OrganizationParams = { id: orgId };
   const data = { members: userIds };
