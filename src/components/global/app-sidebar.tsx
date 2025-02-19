@@ -40,6 +40,7 @@ export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcher
   const userRoles: string[] = (user?.["https://buildup.com/claims/roles"] as string[]) || [];
   console.log(userRoles);
   const userRole = userRoles.includes("admin");
+  console.log(userRole);
 
   // Sidebar menu items with dynamic "Home" URL
   const items = [
