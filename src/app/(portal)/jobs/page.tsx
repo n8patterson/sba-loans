@@ -58,7 +58,7 @@ export default function JobsPage() {
   return (
     <div className="p-6 space-y-6 min-h-screen flex flex-col">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center relative z-50">
         <div className="flex flex-col gap-1">
           <h1 className="text-3xl font-bold">Project Progress</h1>
           <p className="text-muted-foreground">Track the status of your home build in real-time.</p>
@@ -66,10 +66,10 @@ export default function JobsPage() {
 
         {/* House Selector */}
         <Select value={selectedHouseId} onValueChange={setSelectedHouseId}>
-          <SelectTrigger className="w-72">
+          <SelectTrigger className="w-72 relative z-50 bg-white shadow-md">
             <SelectValue placeholder="Select a House" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="absolute z-[100] bg-white shadow-lg mt-1">
             {housesData.map((house) => (
               <SelectItem key={house.id} value={house.id}>
                 {house.name}
@@ -78,13 +78,6 @@ export default function JobsPage() {
           </SelectContent>
         </Select>
       </div>
-
-      {/* Gantt Chart */}
-      <Card className="shadow-lg">
-        <CardContent>
-          <GanttChart houseData={selectedHouse!} />
-        </CardContent>
-      </Card>
 
       {/* Job Status Table */}
       <Card className="shadow-lg">
@@ -110,6 +103,13 @@ export default function JobsPage() {
               ))}
             </TableBody>
           </Table>
+        </CardContent>
+      </Card>
+
+      {/* Gantt Chart */}
+      <Card className="shadow-lg">
+        <CardContent>
+          <GanttChart houseData={selectedHouse!} />
         </CardContent>
       </Card>
     </div>

@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "@bryntum/gantt/gantt.stockholm.css";
 
 body {
   font-family: Arial, Helvetica, sans-serif;
