@@ -38,6 +38,7 @@ export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcher
   console.log(user);
   // Extract user role safely
   const userRoles: string[] = (user?.[CUSTOM_CLAIMS_NAMESPACE] as string[]) || [];
+  console.log(userRoles);
   const userRole = userRoles.includes("admin");
 
   // Sidebar menu items with dynamic "Home" URL
