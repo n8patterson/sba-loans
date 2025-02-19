@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { LoadingSpinner } from "@/components/global/loading-spinner";
 import { useUserRole } from "@/hooks/useUserRole";
 
-export default function Home() {
+export default function PortalPage() {
   const router = useRouter();
 
   const { role, isAuthenticated } = useUserRole();
