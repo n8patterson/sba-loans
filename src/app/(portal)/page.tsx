@@ -7,6 +7,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 
 export default function Home() {
   const router = useRouter();
+
   const { role, isAuthenticated } = useUserRole();
 
   const [loading, setLoading] = useState(true);
