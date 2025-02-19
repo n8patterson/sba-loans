@@ -1,0 +1,233 @@
+{
+  "success": true,
+  "project": {
+    "calendar": "construction",
+    "startDate": "2025-03-01",
+    "hoursPerDay": 8,
+    "daysPerWeek": 6,
+    "daysPerMonth": 24
+  },
+  "calendars": {
+    "rows": [
+      {
+        "id": "construction",
+        "name": "Construction Work Hours",
+        "intervals": [
+          {
+            "recurrentStartDate": "on Sun at 0:00",
+            "recurrentEndDate": "on Mon at 0:00",
+            "isWorking": false
+          }
+        ],
+        "expanded": true,
+        "children": [
+          {
+            "id": "dayShift",
+            "name": "Day Shift",
+            "intervals": [
+              {
+                "recurrentStartDate": "every weekday at 12:00",
+                "recurrentEndDate": "every weekday at 13:00",
+                "isWorking": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "tasks": {
+    "rows": [
+      {
+        "id": 1000,
+        "name": "Build New Home",
+        "percentDone": 30,
+        "startDate": "2025-03-01",
+        "expanded": true,
+        "children": [
+          {
+            "id": 1,
+            "name": "Foundation",
+            "percentDone": 100,
+            "duration": 14,
+            "startDate": "2025-03-01",
+            "endDate": "2025-03-14",
+            "expanded": true,
+            "children": [
+              {
+                "id": 11,
+                "name": "Excavation",
+                "percentDone": 100,
+                "startDate": "2025-03-01",
+                "duration": 3,
+                "endDate": "2025-03-04",
+                "cost": 5000
+              },
+              {
+                "id": 12,
+                "name": "Pouring Concrete",
+                "percentDone": 100,
+                "startDate": "2025-03-05",
+                "duration": 5,
+                "endDate": "2025-03-10",
+                "cost": 10000
+              },
+              {
+                "id": 13,
+                "name": "Curing Time",
+                "percentDone": 100,
+                "startDate": "2025-03-11",
+                "duration": 4,
+                "endDate": "2025-03-14",
+                "cost": 0
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Framing",
+            "percentDone": 75,
+            "startDate": "2025-03-15",
+            "duration": 14,
+            "endDate": "2025-03-28",
+            "children": [
+              {
+                "id": 21,
+                "name": "Wall Framing",
+                "percentDone": 80,
+                "startDate": "2025-03-15",
+                "duration": 7,
+                "endDate": "2025-03-21",
+                "cost": 12000
+              },
+              {
+                "id": 22,
+                "name": "Roof Framing",
+                "percentDone": 60,
+                "startDate": "2025-03-22",
+                "duration": 6,
+                "endDate": "2025-03-28",
+                "cost": 8000
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Plumbing & Electrical",
+            "percentDone": 50,
+            "startDate": "2025-03-29",
+            "duration": 14,
+            "endDate": "2025-04-12",
+            "children": [
+              {
+                "id": 31,
+                "name": "Install Plumbing",
+                "percentDone": 60,
+                "startDate": "2025-03-29",
+                "duration": 7,
+                "endDate": "2025-04-04",
+                "cost": 9000
+              },
+              {
+                "id": 32,
+                "name": "Install Electrical Wiring",
+                "percentDone": 40,
+                "startDate": "2025-04-05",
+                "duration": 7,
+                "endDate": "2025-04-12",
+                "cost": 7000
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "name": "Drywall & Interior",
+            "percentDone": 20,
+            "startDate": "2025-04-13",
+            "duration": 10,
+            "endDate": "2025-04-23",
+            "children": [
+              {
+                "id": 41,
+                "name": "Drywall Installation",
+                "percentDone": 30,
+                "startDate": "2025-04-13",
+                "duration": 5,
+                "endDate": "2025-04-18",
+                "cost": 6000
+              },
+              {
+                "id": 42,
+                "name": "Interior Painting",
+                "percentDone": 10,
+                "startDate": "2025-04-19",
+                "duration": 4,
+                "endDate": "2025-04-23",
+                "cost": 3000
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "name": "Final Touches",
+            "percentDone": 5,
+            "startDate": "2025-04-24",
+            "duration": 7,
+            "endDate": "2025-04-30",
+            "children": [
+              {
+                "id": 51,
+                "name": "Install Flooring",
+                "percentDone": 10,
+                "startDate": "2025-04-24",
+                "duration": 3,
+                "endDate": "2025-04-26",
+                "cost": 5000
+              },
+              {
+                "id": 52,
+                "name": "Fixtures & Appliances",
+                "percentDone": 0,
+                "startDate": "2025-04-27",
+                "duration": 3,
+                "endDate": "2025-04-29",
+                "cost": 8000
+              },
+              {
+                "id": 53,
+                "name": "Final Inspection",
+                "percentDone": 0,
+                "startDate": "2025-04-30",
+                "duration": 1,
+                "endDate": "2025-04-30",
+                "cost": 2000
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "dependencies": {
+    "rows": [
+      { "id": 1, "fromTask": 11, "toTask": 21 },
+      { "id": 2, "fromTask": 12, "toTask": 21 },
+      { "id": 3, "fromTask": 21, "toTask": 31 },
+      { "id": 4, "fromTask": 22, "toTask": 32 },
+      { "id": 5, "fromTask": 31, "toTask": 41 },
+      { "id": 6, "fromTask": 32, "toTask": 42 },
+      { "id": 7, "fromTask": 41, "toTask": 51 },
+      { "id": 8, "fromTask": 42, "toTask": 52 },
+      { "id": 9, "fromTask": 52, "toTask": 53 }
+    ]
+  },
+  "resources": {
+    "rows": [
+      { "id": 1, "name": "General Contractor" },
+      { "id": 2, "name": "Plumber" },
+      { "id": 3, "name": "Electrician" },
+      { "id": 4, "name": "Painter" },
+      { "id": 5, "name": "Flooring Installer" }
+    ]
+  }
+}
