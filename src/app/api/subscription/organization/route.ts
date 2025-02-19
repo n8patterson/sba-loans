@@ -2,8 +2,8 @@ import { getAllConnections } from "@/lib/auth0/connections";
 import { getAllRoles, addMemberRoles } from "@/lib/auth0/roles";
 import { addMembers, createOrganization } from "@/lib/auth0/organizations";
 import { updateAppMetadata } from "@/lib/auth0/users";
-import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { NextRequest, NextResponse } from "next/server";
+import { appClient } from "@/lib/auth0";
 
 type ConnectionMeta = {
   name: string;
@@ -23,7 +23,7 @@ type Organization = {
   }[];
 };
 
-export const GET = withApiAuthRequired(async (req: NextRequest) => {
+export const GET = appClient.withApiAuthRequired(async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const org_name = searchParams.get("org_name");
 
@@ -69,7 +69,7 @@ export const GET = withApiAuthRequired(async (req: NextRequest) => {
     }
 
     const res = new NextResponse();
-    const session = await getSession(req, res);
+    const session = await appClient.getSession(req, res);
     const user_id = session?.user.sub;
 
     if (!user_id) {

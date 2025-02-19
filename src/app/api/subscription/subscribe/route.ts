@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateAppMetadata } from "@/lib/auth0/users";
-import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import { appClient } from "@/lib/auth0";
 
 // Allowed subscription plans
 const allowedPlans = ["personal", "team", "enterprise"];
 
 // Wrapper for the GET handler with `withApiAuthRequired`
-export const GET = withApiAuthRequired(async (req: NextRequest) => {
+export const GET = appClient.withApiAuthRequired(async (req: NextRequest) => {
   // Extract query parameters
   const { searchParams } = new URL(req.url);
   const plan = searchParams.get("plan")?.toLowerCase() || "";
@@ -17,7 +17,7 @@ export const GET = withApiAuthRequired(async (req: NextRequest) => {
 
   try {
     const res = new NextResponse();
-    const session = await getSession(req, res);
+    const session = await appClient.getSession(req, res);
 
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

@@ -1,6 +1,5 @@
 import { Role } from "@/lib/roles";
 import { appClient, managementClient } from "@/lib/auth0";
-import { InviteMemberDialog } from "@/components/global/InviteMemberDialog";
 import { PendingInvitationsTable } from "@/components/global/pending-invitations-table";
 import { ActiveMembersTable } from "@/components/global/active-members-table";
 import { InviteTeamMembers } from "@/components/global/invite-team-members";
@@ -23,7 +22,6 @@ export default async function AccountPage() {
           <h1 className="text-3xl font-bold">Members</h1>
           <p className="text-muted-foreground">Manage the members of the organization.</p>
         </div>
-        <InviteMemberDialog />
       </div>
 
       <ActiveMembersTable

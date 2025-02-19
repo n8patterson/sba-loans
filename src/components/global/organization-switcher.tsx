@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { Check, PlusCircle, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -22,6 +21,9 @@ interface OrganizationSwitcherProps {
 }
 export function OrganizationSwitcher({ organizations, currentOrgId }: OrganizationSwitcherProps) {
   const router = useRouter();
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [open, setOpen] = useState(false);
 
   const currentOrg = organizations.find((org) => org.id === currentOrgId);
 
