@@ -13,7 +13,14 @@ export default async function Home() {
   const session = await appClient.getSession();
 
   if (session) {
-    redirect("/dashboard");
+    // Get roles
+    const userRoles = session.user["https://buildup.com/claims/roles"];
+    const userRole = userRoles.includes("admin");
+    if (userRole) {
+      redirect("/admin");
+    } else {
+      redirect("/dashboard");
+    }
   }
 
   return (
