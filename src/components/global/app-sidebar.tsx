@@ -6,6 +6,7 @@ import { SidebarNewsletterForm } from "@/components/global/sidebar-newsletter-fo
 import { SidebarReferralForm } from "./sidebar-referral-form";
 import { OrganizationSwitcher } from "./organization-switcher";
 import Link from "next/link";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 import {
   Sidebar,
@@ -22,29 +23,10 @@ import {
 
 import { AuthButtons } from "@/components/auth/AuthButtons";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Jobs",
-    url: "/jobs",
-    icon: MapPinHouseIcon,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Contacts",
-    url: "/contacts",
-    icon: Users, // New tab for contacts
-  },
-];
+// Define Type for Auth0 User Metadata
+interface UserMetadata {
+  roles?: string[];
+}
 
 interface OrganizationSwitcherProps {
   // TODO
@@ -54,6 +36,38 @@ interface OrganizationSwitcherProps {
 }
 
 export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcherProps) {
+  const CUSTOM_CLAIMS_NAMESPACE = process.env.NEXT_PUBLIC_CUSTOM_CLAIMS_NAMESPACE || "https://your-app.com/claims";
+
+  // Get user from useUser hook.
+  const { user } = useUser();
+  console.log(user);
+  // Extract user role safely
+  const userMetadata: UserMetadata = (user?.[CUSTOM_CLAIMS_NAMESPACE] as UserMetadata) || {};
+  const userRole = userMetadata.roles?.[0] || "user"; // Default role if missing
+  // Sidebar menu items with dynamic "Home" URL
+  const items = [
+    {
+      title: "Home",
+      url: userRole === "admin" ? "/admin" : "/dashboard",
+      icon: Home,
+    },
+    {
+      title: "Jobs",
+      url: "/jobs",
+      icon: MapPinHouseIcon,
+    },
+    {
+      title: "Inbox",
+
+      url: "#",
+      icon: Inbox,
+    },
+    {
+      title: "Contacts",
+      url: "/contacts",
+      icon: Users,
+    },
+  ];
   // Get sidebar context from useSidebar hook.
   const { open } = useSidebar();
 
@@ -80,7 +94,7 @@ export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcher
                   {open ? (
                     <Image src="/horizontal-logo-black-and-red.svg" alt="Logo" width={150} height={50} priority />
                   ) : (
-                    <Image src="/omniclan.png" alt="Logo" width={25} height={25} priority />
+                    <Image src="/red-logo-icon.png" alt="Logo" width={25} height={25} priority />
                   )}
                 </a>
               </SidebarMenuButton>

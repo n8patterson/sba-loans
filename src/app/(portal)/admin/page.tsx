@@ -5,6 +5,7 @@ import { columns, WarrantyClaim } from "@/components/admin/columns";
 import { DataTable } from "@/components/admin/data-table";
 import { useState } from "react";
 import { ClaimsCalendar } from "@/components/admin/calendar";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 // Sample warranty claims (Replace with API data later)
 const sampleClaims: WarrantyClaim[] = [
@@ -35,7 +36,8 @@ const sampleClaims: WarrantyClaim[] = [
 ];
 
 export default function AdminHome() {
-  const adminName = "Admin User"; // Replace with dynamic auth user later
+  const { user } = useUser();
+  const adminName = user?.name || "Admin";
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [claims, setClaims] = useState(sampleClaims);
 
