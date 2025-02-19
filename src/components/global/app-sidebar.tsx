@@ -23,11 +23,6 @@ import {
 
 import { AuthButtons } from "@/components/auth/AuthButtons";
 
-// Define Type for Auth0 User Metadata
-interface UserMetadata {
-  roles?: string[];
-}
-
 interface OrganizationSwitcherProps {
   // TODO
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,19 +31,20 @@ interface OrganizationSwitcherProps {
 }
 
 export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcherProps) {
-  const CUSTOM_CLAIMS_NAMESPACE = process.env.NEXT_PUBLIC_CUSTOM_CLAIMS_NAMESPACE || "https://your-app.com/claims";
+  const CUSTOM_CLAIMS_NAMESPACE = process.env.NEXT_PUBLIC_CUSTOM_CLAIMS_NAMESPACE + "/roles" || "https://your-app.com/claims";
 
   // Get user from useUser hook.
   const { user } = useUser();
   console.log(user);
   // Extract user role safely
-  const userMetadata: UserMetadata = (user?.[CUSTOM_CLAIMS_NAMESPACE] as UserMetadata) || {};
-  const userRole = userMetadata.roles?.[0] || "user"; // Default role if missing
+  const userRoles: string[] = (user?.[CUSTOM_CLAIMS_NAMESPACE] as string[]) || [];
+  const userRole = userRoles.includes("admin");
+
   // Sidebar menu items with dynamic "Home" URL
   const items = [
     {
       title: "Home",
-      url: userRole === "admin" ? "/admin" : "/dashboard",
+      url: userRole ? "/admin" : "/dashboard",
       icon: Home,
     },
     {
