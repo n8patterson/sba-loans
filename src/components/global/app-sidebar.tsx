@@ -31,13 +31,13 @@ interface OrganizationSwitcherProps {
 }
 
 export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcherProps) {
-  const CUSTOM_CLAIMS_NAMESPACE = process.env.NEXT_PUBLIC_CUSTOM_CLAIMS_NAMESPACE + "/roles" || "https://your-app.com/claims";
+  // const CUSTOM_CLAIMS_NAMESPACE = process.env.CUSTOM_CLAIMS_NAMESPACE + "/roles" || "https://your-app.com/claims";
 
   // Get user from useUser hook.
   const { user } = useUser();
   console.log(user);
   // Extract user role safely
-  const userRoles: string[] = (user?.[CUSTOM_CLAIMS_NAMESPACE] as string[]) || [];
+  const userRoles: string[] = (user?.["https://buildup.com/claims/roles"] as string[]) || [];
   console.log(userRoles);
   const userRole = userRoles.includes("admin");
 
