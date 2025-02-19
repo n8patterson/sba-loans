@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Home, Inbox, Users, MapPinHouseIcon } from "lucide-react";
 import { SidebarNewsletterForm } from "@/components/global/sidebar-newsletter-form";
 import { SidebarReferralForm } from "./sidebar-referral-form";
+import { OrganizationSwitcher } from "./organization-switcher";
 import Link from "next/link";
 
 import {
@@ -45,7 +46,14 @@ const items = [
   },
 ];
 
-export function AppSidebar() {
+interface OrganizationSwitcherProps {
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  organizations: any;
+  currentOrgId: string;
+}
+
+export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcherProps) {
   // Get sidebar context from useSidebar hook.
   const { open } = useSidebar();
 
@@ -64,30 +72,32 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarContent>
         {/* Logo Section */}
-        <SidebarHeader className="flex items-center justify-center pt-6">
+        <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <a href="/">
                   {open ? (
-                    <div className="flex items-center">
-                      <Image src="/horizontal-logo-black-and-red.svg" alt="Logo" width={150} height={50} priority />
-                    </div>
+                    <Image src="/horizontal-logo-black-and-red.svg" alt="Logo" width={150} height={50} priority />
                   ) : (
-                    <Image src="/omniclan.png" alt="Logo" width={200} height={200} priority />
+                    <Image src="/omniclan.png" alt="Logo" width={25} height={25} priority />
                   )}
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
+          <OrganizationSwitcher organizations={organizations} currentOrgId={currentOrgId} />
         </SidebarHeader>
+
+        {/* Organization Switcher */}
+
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link href={item.url} className="flex items-center space-x-9 text-xl">
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
@@ -100,11 +110,11 @@ export function AppSidebar() {
       </SidebarContent>
 
       {/* Sidebar Footer - Login/Logout Buttons */}
-      <SidebarFooter className="flex justify-center py-4 border-t">
-        <div className="p-1">
+      <SidebarFooter>
+        <div>
           <SidebarReferralForm />
         </div>
-        <div className="p-1">
+        <div>
           <SidebarNewsletterForm />
         </div>
         <AuthButtons />

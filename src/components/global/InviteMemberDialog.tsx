@@ -45,7 +45,7 @@ export function InviteMemberDialog() {
           </div>
 
           {/* Connection Dropdown */}
-          <div>
+          {/* <div>
             <label htmlFor="connection" className="block text-sm font-medium text-gray-700">
               Connection
             </label>
@@ -58,7 +58,7 @@ export function InviteMemberDialog() {
                 <SelectItem value="external">External</SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
         </div>
         <DialogFooter>
           <Button onClick={() => setOpen(false)} variant="outline">
