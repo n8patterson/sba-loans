@@ -16,6 +16,7 @@ export default async function Home() {
     // Get roles
     const userRoles = session.user["https://buildup.com/claims/roles"];
     const userRole = userRoles.includes("admin");
+    console.log(userRole);
     if (userRole) {
       redirect("/admin");
     } else {
