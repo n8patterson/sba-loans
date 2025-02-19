@@ -8,34 +8,34 @@ interface GanttChartProps {
     id: string;
     name: string;
 
-    progress: { name: string; start: string; end: string; dependencies: string; progress: number }[];
+    progress: { id: string; name: string; start: string; end: string; dependencies: string; progress: number }[];
   } | null;
 }
 
 export function GanttChart({ houseData }: GanttChartProps) {
   const [isClient, setIsClient] = useState(false);
   const ganttRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [gantt, setGantt] = useState<Gantt | null>(null);
 
   useEffect(() => {
     setIsClient(true);
-    if (ganttRef.current && houseData) {
-      // Clear the gantt chart
-      ganttRef.current.innerHTML = "";
-      const tasks = houseData.progress.map((task, index) => ({
-        id: (index + 1).toString(),
-        name: task.name,
-        start: task.start,
-        end: task.end,
-        progress: task.progress,
-        dependencies: index > 0 ? String(index) : "",
-      }));
+  }, []);
 
-      new Gantt(ganttRef.current, tasks, {
+  useEffect(() => {
+    if (isClient && ganttRef.current && houseData) {
+      // Clear previous Gantt instance
+      ganttRef.current.innerHTML = "";
+
+      // Initialize new Gantt chart
+      const newGantt = new Gantt(ganttRef.current, houseData.progress, {
         view_mode: "Week",
         on_click: (task) => alert(`Clicked on task: ${task.name}`),
       });
+
+      setGantt(newGantt);
     }
-  }, [houseData]);
+  }, [isClient, houseData]);
 
   return <>{isClient && <div ref={ganttRef} className="w-full overflow-hidden pointer-events-none select-none"></div>}</>;
 }
