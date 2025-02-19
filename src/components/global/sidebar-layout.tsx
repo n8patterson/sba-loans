@@ -4,7 +4,7 @@ import { SidebarInset, SidebarTrigger, useSidebar } from "@/components/ui/sideba
 import { Bell, Calendar, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
-import { TrialInfoBar } from "@/components/global/trialInfoBar";
+import { TrialInfoBar } from "@/components/global/trial-info-bar";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export function SidebarLayout({ children }: { children: React.ReactNode }) {
