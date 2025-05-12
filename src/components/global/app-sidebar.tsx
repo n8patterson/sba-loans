@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Home, Inbox, Users, MapPinHouseIcon } from "lucide-react";
+import { Home, Users, Newspaper } from "lucide-react";
 import { SidebarNewsletterForm } from "@/components/global/sidebar-newsletter-form";
 import { SidebarReferralForm } from "./sidebar-referral-form";
 import { OrganizationSwitcher } from "./organization-switcher";
@@ -50,15 +50,9 @@ export function AppSidebar({ organizations, currentOrgId }: OrganizationSwitcher
       icon: Home,
     },
     {
-      title: "Jobs",
-      url: "/jobs",
-      icon: MapPinHouseIcon,
-    },
-    {
-      title: "Inbox",
-
-      url: "#",
-      icon: Inbox,
+      title: "Cases",
+      url: "/cases",
+      icon: Newspaper,
     },
     {
       title: "Contacts",
